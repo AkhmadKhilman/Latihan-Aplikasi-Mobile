@@ -1,12 +1,8 @@
-double getTotalBayar(int purchase, bool member) {
-  // MInimal belanja Rp100.000
+int getTotalPayment(int purchase, bool member) {
   const int MIN_PURCHASE = 100000;
-  // Diskon belanja 10%
   const int SHOPPING_DISCOUNT = 10;
-  // Diskon member 5%
   const int MEMBER_DISCOUNT = 5;
-  // Maksimal potongan Rp25.000
-  const int MAX_CASHBACK = 25000;
+  const int MAX_DISCOUNT = 25000;
 
   int discount = 0;
 
@@ -19,84 +15,42 @@ double getTotalBayar(int purchase, bool member) {
     }
   }
 
-  double total_cashback = discount / 100 * purchase;
+  double discountPercentage = purchase * discount / 100;
+  int totalDiscount = discountPercentage.toInt();
 
   // BR-03 Maksimal potongan diskon sebesar Rp25.000
-  if (total_cashback >= MAX_CASHBACK) {
-    total_cashback = 25000;
+  if (totalDiscount >= MAX_DISCOUNT) {
+    totalDiscount = MAX_DISCOUNT;
   }
 
-  return purchase - total_cashback;
+  return purchase - totalDiscount;
 }
 
 void main() {
-  double result = 0;
+  int resultTotalPayment = 0;
 
-  // Skenario 1
-  // Total Belanjaan Rp80.000
-  const int TOTAL_PURCHASE_1 = 80000;
-  // Status belum member
-  const bool MEMBER_STATUS_1 = false;
-  // Hasil Ekspetasi Rp80.000
-  const int EXPECTED_TOTAL_PURCHASE_1 = 80000;
+  // Data skenario 1-4 dari total belanja, status member, dan ekspetasi total bayar
+  List<Map<String, dynamic>> dataScenario = [
+    {'belanja': 80000, 'member': false, 'payment': 80000},
+    {'belanja': 150000, 'member': false, 'payment': 135000},
+    {'belanja': 150000, 'member': true, 'payment': 127500},
+    {'belanja': 300000, 'member': true, 'payment': 275000},
+  ];
 
-  result = getTotalBayar(TOTAL_PURCHASE_1, MEMBER_STATUS_1);
-  if (result == EXPECTED_TOTAL_PURCHASE_1) {
-    print("\nSkenario pertama SUKSES!!! dengan hasil Rp$result \n");
-  } else {
-    print(
-      "\nSkenario pertama masih belum berjalan semestinya, cek kembali data atau fungsi yang berjalan!!! \n",
+  final int MAX_SCENARIO = dataScenario.length;
+  for (int i = 0; i < MAX_SCENARIO; i++) {
+    resultTotalPayment = getTotalPayment(
+      dataScenario[i]['belanja'],
+      dataScenario[i]['member'],
     );
-  }
-
-  // Skenario 2
-  // Total Belanjaan Rp150.000
-  const int TOTAL_PURCHASE_2 = 150000;
-  // Status belum member
-  const bool MEMBER_STATUS_2 = false;
-  // Hasil Ekspetasi Rp135.000
-  const int EXPECTED_TOTAL_PURCHASE_2 = 135000;
-
-  result = getTotalBayar(TOTAL_PURCHASE_2, MEMBER_STATUS_2);
-  if (result == EXPECTED_TOTAL_PURCHASE_2) {
-    print("Skenario kedua SUKSES!!! dengan hasil Rp$result \n");
-  } else {
-    print(
-      "Skenario kedua masih belum berjalan semestinya, cek kembali data atau fungsi yang berjalan!!! \n",
-    );
-  }
-
-  // Skenario 3
-  // Total Belanjaan Rp150.000
-  const int TOTAL_PURCHASE_3 = 150000;
-  // Status belum member
-  const bool MEMBER_STATUS_3 = true;
-  // Hasil Ekspetasi Rp127.500
-  const int EXPECTED_TOTAL_PURCHASE_3 = 127500;
-
-  result = getTotalBayar(TOTAL_PURCHASE_3, MEMBER_STATUS_3);
-  if (result == EXPECTED_TOTAL_PURCHASE_3) {
-    print("Skenario ketiga SUKSES!!! dengan hasil Rp$result \n");
-  } else {
-    print(
-      "Skenario ketiga masih belum berjalan semestinya, cek kembali data atau fungsi yang berjalan!!! \n",
-    );
-  }
-
-  // Skenario 4
-  // Total Belanjaan Rp300.000
-  const int TOTAL_PURCHASE_4 = 300000;
-  // Status belum member
-  const bool MEMBER_STATUS_4 = true;
-  // Hasil Ekspetasi Rp275.000
-  const int EXPECTED_TOTAL_PURCHASE_4 = 275000;
-
-  result = getTotalBayar(TOTAL_PURCHASE_4, MEMBER_STATUS_4);
-  if (result == EXPECTED_TOTAL_PURCHASE_4) {
-    print("Skenario keempat SUKSES!!! dengan hasil Rp$result \n");
-  } else {
-    print(
-      "Skenario keempat masih belum berjalan semestinya, cek kembali data atau fungsi yang berjalan!!! \n",
-    );
+    if (resultTotalPayment == dataScenario[i]['payment']) {
+      print(
+        "\n Skenario-${i + 1} \n dengan total belanja: ${dataScenario[i]['belanja']}, \n status member: ${dataScenario[i]['member']}, \n dengan ekspetasi total yang dibayar: ${dataScenario[i]['payment']} \n Sesuai dengan hasil: $resultTotalPayment.",
+      );
+    } else {
+      print(
+        "Skenario gagal, cek data skenario atau fungsi mengambil total pembayaran.",
+      );
+    }
   }
 }
