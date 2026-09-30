@@ -120,6 +120,64 @@ void cetakStatusGrade(String grade) {
   print(keterangan);
 }
 
+void cetakPertemuan(int total) {
+  for (int i = 1; i <= total; i++) {
+    // print("Hasil ke-$i");
+
+    if (i % 2 == 0) {
+      print("Hasil ke-$i");
+    }
+  }
+}
+
+void contohForin() {
+  List<int> pengeluaran = [10000, 40000, 5000];
+
+  print(pengeluaran);
+
+  int totalPengeluaran = 0;
+
+  for (final belanja in pengeluaran) {
+    totalPengeluaran += belanja;
+  }
+
+  print("Total Pengeluaran = $totalPengeluaran");
+}
+
+void contohWhile() {
+  const int TOTAL_PERCOBAAN = 3;
+  const String DEFAULT_PASSWORD = "11241";
+
+  List<String> password = ["1234", "3456", "1124"];
+  int percobaan = 0;
+  bool berhasil = false;
+
+  while (!berhasil && percobaan < TOTAL_PERCOBAAN) {
+    String getPassword = password[percobaan];
+    percobaan++;
+    if (getPassword == DEFAULT_PASSWORD) {
+      berhasil = true;
+    }
+  }
+
+  print("Status: $berhasil, dengan percobaan: $percobaan");
+}
+
+void cetakNilai() {
+  List<int> nilai = [75, 0, 50, 90, 30, 100];
+
+  for (final n in nilai) {
+    if (n == 0) {
+      continue;
+    }
+    if (n < 50) {
+      print("Nilai ditemukan dibawah 50: $n");
+      break;
+    }
+    print("Nilai aman: $n");
+  }
+}
+
 void main() {
   print(checkScoreKursus(59.4));
 
@@ -130,6 +188,13 @@ void main() {
   cetakStatusKuliah("Senin");
 
   cetakStatusGrade("B");
-}
 
+  cetakPertemuan(4);
+
+  contohForin();
+
+  contohWhile();
+
+  cetakNilai();
+}
 ```
