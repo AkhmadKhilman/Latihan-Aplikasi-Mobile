@@ -16,7 +16,8 @@ int getTotalPayment(int purchase, bool member) {
   }
 
   double discountPercentage = purchase * discount / 100;
-  int totalDiscount = discountPercentage.toInt();
+  int totalDiscount = discountPercentage
+      .toInt(); /* DIPERBAIKI PEMBULATAN UANGNYA */
 
   // BR-03 Maksimal potongan diskon sebesar Rp25.000
   if (totalDiscount >= MAX_DISCOUNT) {
@@ -31,6 +32,7 @@ void main() {
 
   // Data skenario 1-4 dari total belanja, status member, dan ekspetasi total bayar
   List<Map<String, dynamic>> dataScenario = [
+    /* DIPERBAIKI TYPE DATA DYNAMIC NYA */
     {'belanja': 80000, 'member': false, 'payment': 80000},
     {'belanja': 150000, 'member': false, 'payment': 135000},
     {'belanja': 150000, 'member': true, 'payment': 127500},
