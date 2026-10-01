@@ -1,3 +1,4 @@
+/* LATIHAN SOAL 1 : KASIR DENGAN DISKON */
 int getTotalPayment(int purchase, bool member) {
   const int MIN_PURCHASE = 100000;
   const int SHOPPING_DISCOUNT = 10;
@@ -17,7 +18,7 @@ int getTotalPayment(int purchase, bool member) {
 
   double discountPercentage = purchase * discount / 100;
   int totalDiscount = discountPercentage
-      .toInt(); /* DIPERBAIKI PEMBULATAN UANGNYA */
+      .toInt(); /* PERLU DIPERBAIKI PEMBULATAN UANGNYA */
 
   // BR-03 Maksimal potongan diskon sebesar Rp25.000
   if (totalDiscount >= MAX_DISCOUNT) {
@@ -27,20 +28,23 @@ int getTotalPayment(int purchase, bool member) {
   return purchase - totalDiscount;
 }
 
+/* LATIHAN SOAL 2 : TARIF PARKIR */
+
 void main() {
+  /* HASIL LATIHAN SOAL 1 : KASIR DENGAN DISKON */
   int resultTotalPayment = 0;
 
   // Data skenario 1-4 dari total belanja, status member, dan ekspetasi total bayar
   List<Map<String, dynamic>> dataScenario = [
-    /* DIPERBAIKI TYPE DATA DYNAMIC NYA */
+    /* PERLU DIPERBAIKI TYPE DATA DYNAMIC NYA */
     {'belanja': 80000, 'member': false, 'payment': 80000},
     {'belanja': 150000, 'member': false, 'payment': 135000},
     {'belanja': 150000, 'member': true, 'payment': 127500},
     {'belanja': 300000, 'member': true, 'payment': 275000},
   ];
 
-  final int MAX_SCENARIO = dataScenario.length;
-  for (int i = 0; i < MAX_SCENARIO; i++) {
+  final int lengthScenario = dataScenario.length;
+  for (int i = 0; i < lengthScenario; i++) {
     resultTotalPayment = getTotalPayment(
       dataScenario[i]['belanja'],
       dataScenario[i]['member'],
@@ -55,4 +59,9 @@ void main() {
       );
     }
   }
+  /* HASIL LATIHAN SOAL 1 : KASIR DENGAN DISKON */
+
+  /* HASIL LATIHAN SOAL 2 : TARIF PARKIR */
+
+  /* HASIL LATIHAN SOAL 2 : TARIF PARKIR */
 }
